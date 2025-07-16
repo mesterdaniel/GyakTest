@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>WhatsApp Üzenetküldő</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #edf1f5;
+      --card-bg: #ffffff;
+      --text-color: #2c3e50;
+      --label-color: #34495e;
+      --input-border: #d0d7de;
+      --button-color: #25d366;
+      --button-hover: #1ebe5d;
+      --alert-bg: #eafaf1;
+      --alert-text: #1e7048;
+      --line-bg: #3b3b3b;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-color);
+      background-image: url("background.jpg");
+      background-size: cover;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .sidebar {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50px;
+      width: 500px;
+      background-color: var(--line-bg);
+      padding: 2rem;
+      box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .sidebar-content {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo {
+      width: 140px;
+      height: auto;
+      margin-bottom: 2rem;
+    }
+
+    .form-container {
+      width: 100%;
+      background-color: var(--card-bg);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: var(--text-color);
+    }
+
+    label {
+      display: block;
+      margin: 1rem 0 0.5rem;
+      font-weight: 600;
+      color: var(--label-color);
+    }
+
+    input[type="text"],
+    input[type="url"],
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--input-border);
+      border-radius: 6px;
+      font-size: 1rem;
+      background-color: #fdfdfd;
+      transition: 0.2s border-color, 0.2s box-shadow;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--button-color);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.2);
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.25rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      background-color: var(--button-color);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: var(--button-hover);
+    }
+
+    .alert {
+      margin-top: 2rem;
+      padding: 1rem;
+      border-radius: 6px;
+      background-color: var(--alert-bg);
+      color: var(--alert-text);
+      text-align: center;
+    }
+
+    @media screen and (max-width: 600px) {
+      .sidebar {
+        width: 100%;
+        left: 0;
+        border-radius: 0;
+        padding: 1rem;
+        align-items: flex-start;
+      }
+
+      .form-container {
+        padding: 1rem;
+      }
+
+      .logo {
+        width: 100px;
+        margin: 0 auto 1rem auto;
+      }
+    }
+    #message{
+      resize: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-content">
+    <img src="logo.png" alt="Logo" class="logo">
+
+    <div class="form-container">
+      <h1>WhatsApp Üzenetküldő</h1>
+
+      <form action="/send-message" method="post">
+        <label for="phoneNumber">Telefonszám (országkóddal, pl. +36201234567):</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" required>
+
+        <label for="message">Üzenet:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+<!--
+        <label for="imageUrl">Kép URL (opcionális):</label>
+        <input type="url" id="imageUrl" name="imageUrl">
+-->
+        <button type="submit">Küldés WhatsAppon</button>
+      </form>
+
+      <!-- Hibaüzenet -->
+      <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <p th:text="${errorMessage}"></p>
+      </div>
+      <!-- Sikeres -->
+      <div th:if="${status}" class="alert" role="alert">
+        <p th:text="${status}"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
