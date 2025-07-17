@@ -28,17 +28,18 @@ public class TwilioService {
     private int proxyPort;
 */
     public void sendMessage(String to, String text) {
-        //Twilio.init(accountSid, authToken);
+        Twilio.init(accountSid, authToken);
         // Proxy beállítása
-        HttpHost proxy = new HttpHost(proxyHost, proxyPort, "http");
-        HttpClientBuilder clientBuilder = HttpClientBuilder.create().setProxy(proxy);
-        NetworkHttpClient httpClient = new NetworkHttpClient(clientBuilder);
-
+       // HttpHost proxy = new HttpHost(proxyHost, proxyPort, "http");
+        //HttpClientBuilder clientBuilder = HttpClientBuilder.create().setProxy(proxy);
+        //NetworkHttpClient httpClient = new NetworkHttpClient(clientBuilder);
+/*
         // Twilio kliens létrehozása proxyval
         TwilioRestClient client = new TwilioRestClient.Builder(accountSid, authToken)
                 .httpClient(httpClient)
                 .build();
-
+*/
+        TwilioRestClient client=new TwilioRestClient.Builder(accountSid, authToken).build();
         Message message = Message.creator(
                 new PhoneNumber("whatsapp:" + to),
                 new PhoneNumber(fromNumber),
