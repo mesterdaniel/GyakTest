@@ -21,11 +21,12 @@ public class TwilioService {
 
     @Value("${twilio.phone-number}")
     private String fromNumber;
+    /*
     @Value("${https.proxyHost}")
     private String proxyHost;
     @Value("${https.proxyPort}")
     private int proxyPort;
-
+*/
     public void sendMessage(String to, String text) {
         //Twilio.init(accountSid, authToken);
         // Proxy beállítása
