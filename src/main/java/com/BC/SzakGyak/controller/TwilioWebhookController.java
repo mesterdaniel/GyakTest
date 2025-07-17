@@ -16,11 +16,16 @@ public class TwilioWebhookController {
     public ResponseEntity<String> receiveMessage(@RequestParam("From") String from,
                                                  @RequestParam("Body") String body) {
 
-        //System.out.println("Üzenet érkezett: " + body + " - Feladótól: " + from);
-        String responseMessage = "<Response><Message>Üzeneted megkaptuk!</Message></Response>";
-        if (body.toLowerCase() == "menu") {
-            responseMessage= twilioService.menu();
-        }
+        System.out.println("Üzenet érkezett: " + body + " - Feladótól: " + from);
+    String lowerCaseBody = body.trim().toLowerCase();
+
+    if (lowerCaseBody.equals("menu")) {
+        responseMessage = twilioService.menu();
+    } else if (lowerCaseBody.equals("1") || lowerCaseBody.equals("2")) {
+        responseMessage = twilioService.menuReply(lowerCaseBody);
+    } else {
+        responseMessage = "<Response><Message>Üzeneted megkaptuk! Írj 'menu'-t a lehetőségekhez.</Message></Response>";
+    }
 
 
 
