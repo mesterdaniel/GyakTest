@@ -18,7 +18,7 @@ public class TwilioWebhookController {
 
         System.out.println("Üzenet érkezett: " + body + " - Feladótól: " + from);
     String lowerCaseBody = body.trim().toLowerCase();
-
+    String responseMessage;
     if (lowerCaseBody.equals("menu")) {
         responseMessage = twilioService.menu();
     } else if (lowerCaseBody.equals("1") || lowerCaseBody.equals("2")) {
