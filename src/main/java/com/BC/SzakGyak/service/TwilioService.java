@@ -49,5 +49,30 @@ public class TwilioService {
 
         System.out.println("Message SID: " + message.getSid());
     }
+     public String menu() {
+        return "<Response><Message>Menü:" +
+                "1:Info" +
+                "2:Elérhetőség" +
+                "</Message></Response>";
+    }
+
+    public String menuReply(String body) {
+
+        String response;
+        switch (body) {
+            case "1":
+                response = "Info: Nincs info";
+                break;
+            case "2":
+                response = "Elérhetőség: XYZ";
+                break;
+            default:
+                response = "Jelenleg nincs ilyen opció :(";
+                break;
+        }
+
+
+        return "<Response><Message>" + response + "</Message></Response>";
+    }
 }
 
