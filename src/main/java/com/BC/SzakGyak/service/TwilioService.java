@@ -50,9 +50,9 @@ public class TwilioService {
         System.out.println("Message SID: " + message.getSid());
     }
      public String menu() {
-        return "<Response><Message>Menü:" +
-                "1:Info" +
-                "2:Elérhetőség" +
+        return "<Response><Message>Menü:" + "\n"+
+                "1:Info" +"\n"+
+                "2:Elérhetőség" +"
                 "</Message></Response>";
     }
 
