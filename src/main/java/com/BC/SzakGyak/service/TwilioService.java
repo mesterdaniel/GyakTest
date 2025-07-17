@@ -52,7 +52,7 @@ public class TwilioService {
      public String menu() {
         return "<Response><Message>Menü:" + "\n"+
                 "1:Info" +"\n"+
-                "2:Elérhetőség" +"
+                "2:Elérhetőség" +
                 "</Message></Response>";
     }
 
