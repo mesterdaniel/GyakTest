@@ -118,20 +118,20 @@ public class TwilioService {
 
             case HELP_MENU:
                 if ("back".equals(msg)) {
-                    userState.setCurrentState(MenuState.MAIN_MENU);
-                    return "Visszatértél a főmenübe. Írd be: menu";
+                    userState.setCurrentState(MenuState.WAITING_FOR_SELECTION);
+                    return "Visszatértél a főmenübe.\n"+buildMenu();
                 }
                 return "Help menüben vagy. Írj 'back'-et a visszalépéshez.";
             case SETTINGS_MENU:
                 if ("back".equals(msg)) {
-                    userState.setCurrentState(MenuState.MAIN_MENU);
-                    return "Visszatértél a főmenübe. Írd be: menu";
+                    userState.setCurrentState(MenuState.WAITING_FOR_SELECTION);
+                    return "Visszatértél a főmenübe."+buildMenu();
                 }
                 return "Setings menüben vagy. Írj 'back'-et a visszalépéshez.";
 
             default:
-                userState.setCurrentState(MenuState.MAIN_MENU);
-                return "Hiba történt, vissza a főmenübe. Írd be: menu";
+                userState.setCurrentState(MenuState.WAITING_FOR_SELECTION);
+                return "Hiba történt, vissza a főmenübe."+buildMenu();
         }
     }
 
