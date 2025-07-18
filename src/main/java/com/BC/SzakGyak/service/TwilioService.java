@@ -117,12 +117,17 @@ public class TwilioService {
                 return handleMenuSelection(msg, userState);
 
             case HELP_MENU:
+                if ("back".equals(msg)) {
+                    userState.setCurrentState(MenuState.MAIN_MENU);
+                    return "Visszatértél a főmenübe. Írd be: menu";
+                }
+                return "Help menüben vagy. Írj 'back'-et a visszalépéshez.";
             case SETTINGS_MENU:
                 if ("back".equals(msg)) {
                     userState.setCurrentState(MenuState.MAIN_MENU);
                     return "Visszatértél a főmenübe. Írd be: menu";
                 }
-                return "Ebben a menüben vagy. Írj 'back'-et a visszalépéshez.";
+                return "Setings menüben vagy. Írj 'back'-et a visszalépéshez.";
 
             default:
                 userState.setCurrentState(MenuState.MAIN_MENU);
@@ -146,7 +151,7 @@ public class TwilioService {
                 userState.setCurrentState(MenuState.MAIN_MENU);
                 return "Kiléptél a menüből.";
             default:
-                return "Kérlek válassz: 1, 2 vagy 0.";
+                return "Kérlek válassz: 1, 2 vagy 0.\n"+buildMenu();
         }
 
     }
