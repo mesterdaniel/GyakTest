@@ -110,8 +110,10 @@ public class TwilioService {
                 if ("menu".equals(msg)) {
                     userState.setCurrentState(MenuState.WAITING_FOR_SELECTION);
                     return buildMenu();
+                }else{
+                    userState.setCurrentState(MenuState.MAIN_MENU);
+                return "Jelenleg nincs ilyen opció. Írd be: menu a lehetőségekhez.";
                 }
-                return "Írd be: menu a lehetőségekhez.";
 
             case WAITING_FOR_SELECTION:
                 return handleMenuSelection(msg, userState);
