@@ -38,6 +38,7 @@ public class TwilioWebhookController {
     }
     @PostMapping("/webhook/twilio")
     public ResponseEntity<String> receiveSms(@RequestParam("From") String from, @RequestParam("Body") String body) {
+       System.out.println("Üzenet érkezett: " + body + " - Feladótól: " + from);
         String responseText = twilioService.handleIncomingMessage(from, body);
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_XML).body(buildTwimlResponse(responseText));
        
