@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 public class TwilioWebhookController {
-    @Autowired
+   /* @Autowired
     private TwilioService twilioService;
     @PostMapping("/webhook/twilio")
     public ResponseEntity<String> receiveMessage(@RequestParam("From") String from,
@@ -30,5 +30,18 @@ public class TwilioWebhookController {
 
 
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_XML).body(responseMessage);
+    }*/
+    @Autowired
+    private TwilioService twilioService;
+    private String buildTwimlResponse(String message) {
+        return "<Response><Message>" + message + "</Message></Response>";
     }
+    @PostMapping("/webhook/twilio")
+    public ResponseEntity<String> receiveSms(@RequestParam("From") String from, @RequestParam("Body") String body) {
+        String responseText = twilioService.handleIncomingMessage(from, body);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_XML).body(buildTwimlResponse(responseText));
+       
+    }
+
+    
 }
